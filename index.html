@@ -681,58 +681,59 @@
 
 <script>
   (function() {
-    // ----- IMAGE FILENAMES (51-100) -----
+    // ----- IMAGE FILENAMES (51-100) - NO "images/" folder -----
+    const imageBasePath = "";  // Empty = images are in root folder
     const imageNames = [
-      "51. Dead as a doornail.png",
-      "52. Devil's advocate.png",
-      "53. Do the trick.png",
-      "54. Don't count your chickens before they hatch.png",
-      "55. Down in the dumps.png",
-      "56. Down to earth.png",
-      "57. Draw the line.png",
-      "58. Drive someone crazy.png",
-      "59. Drop the ball.png",
-      "60. Duck out.png",
-      "61. Easier said than done.png",
-      "62. Eat crow.png",
-      "63. Eat humble pie.png",
-      "64. Eat like a horse.png",
-      "65. Egg someone on.png",
-      "66. Every cloud has a silver lining.png",
-      "67. Eye-opener.png",
-      "68. Eye to eye.png",
-      "69. Face the music.png",
-      "70. Fair and square.png",
-      "71. Fall apart.png",
-      "72. Fall through the cracks.png",
-      "73. Feather one's nest.png",
-      "74. Feel under the weather.png",
-      "75. Fight tooth and nail.png",
-      "76. Find one's feet.png",
-      "77. First things first.png",
-      "78. Fit as a fiddle.png",
-      "79. Fly off the handle.png",
-      "80. Food for thought.png",
-      "81. Foot the bill.png",
-      "82. For good.png",
-      "83. From scratch.png",
-      "84. Full of beans.png",
-      "85. Get a grip.png",
-      "86. Get cold feet.png",
-      "87. Get off someone's back.png",
-      "88. Get out of hand.png",
-      "89. Get the ball rolling.png",
-      "90. Get the hang of.png",
-      "91. Get wind of.png",
-      "92. Give someone the benefit of the doubt.png",
-      "93. Give the green light.png",
-      "94. Go against the grain.png",
-      "95. Go back to the drawing board.png",
-      "96. Go down in flames.png",
-      "97. Go the extra mile.png",
-      "98. Go with the flow.png",
-      "99. Golden opportunity.png",
-      "100. Good things come to those who wait.png"
+      "51. DEAD AS A DOORNAIL.png",
+      "52. DEVIL'S ADVOCATE.png",
+      "53. DO THE TRICK.png",
+      "54. DON'T COUNT YOUR CHICKENS BEFORE THEY HATCH.png",
+      "55. DOWN IN THE DUMPS.png",
+      "56. DOWN TO EARTH.png",
+      "57. DRAW THE LINE.png",
+      "58. DRIVE SOMEONE CRAZY.png",
+      "59. DROP THE BALL.png",
+      "60. DUCK OUT.png",
+      "61. EASIER SAID THAN DONE.png",
+      "62. EAT CROW.png",
+      "63. EAT HUMBLE PIE.png",
+      "64. EAT LIKE A HORSE.png",
+      "65. EGG SOMEONE ON.png",
+      "66. EVERY CLOUD HAS A SILVER LINING.png",
+      "67. EYE-OPENER.png",
+      "68. EYE TO EYE.png",
+      "69. FACE THE MUSIC.png",
+      "70. FAIR AND SQUARE.png",
+      "71. FALL APART.png",
+      "72. FALL THROUGH THE CRACKS.png",
+      "73. FEATHER ONE'S NEST.png",
+      "74. FEEL UNDER THE WEATHER.png",
+      "75. FIGHT TOOTH AND NAIL.png",
+      "76. FIND ONE'S FEET.png",
+      "77. FIRST THINGS FIRST.png",
+      "78. FIT AS A FIDDLE.png",
+      "79. FLY OFF THE HANDLE.png",
+      "80. FOOD FOR THOUGHT.png",
+      "81. FOOT THE BILL.png",
+      "82. FOR GOOD.png",
+      "83. FROM SCRATCH.png",
+      "84. FULL OF BEANS.png",
+      "85. GET A GRIP.png",
+      "86. GET COLD FEET.png",
+      "87. GET OFF SOMEONE'S BACK.png",
+      "88. GET OUT OF HAND.png",
+      "89. GET THE BALL ROLLING.png",
+      "90. GET THE HANG OF.png",
+      "91. GET WIND OF.png",
+      "92. GIVE SOMEONE THE BENEFIT OF THE DOUBT.png",
+      "93. GIVE THE GREEN LIGHT.png",
+      "94. GO AGAINST THE GRAIN.png",
+      "95. GO BACK TO THE DRAWING BOARD.png",
+      "96. GO DOWN IN FLAMES.png",
+      "97. GO THE EXTRA MILE.png",
+      "98. GO WITH THE FLOW.png",
+      "99. GOLDEN OPPORTUNITY.png",
+      "100. GOOD THINGS COME TO THOSE WHO WAIT.png"
     ];
 
     // ----- TEXT FOR AUDIO (51-100) -----
@@ -827,7 +828,6 @@
 
     // ----- MOBILE AUDIO FIXES -----
 
-    // Global function to enable audio and close overlay
     window.enableAudioAndClose = function() {
       enableMobileAudio();
       if (audioOverlay) {
@@ -836,7 +836,6 @@
       }
       audioEnabled = true;
       
-      // Test speech to confirm it works
       try {
         const testMsg = new SpeechSynthesisUtterance('Audio enabled');
         testMsg.lang = 'en-US';
@@ -851,7 +850,6 @@
 
     function enableMobileAudio() {
       try {
-        // Resume AudioContext for mobile
         if (window.AudioContext || window.webkitAudioContext) {
           const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
           if (audioCtx.state === 'suspended') {
@@ -859,9 +857,7 @@
           }
         }
         
-        // iOS Safari specific fix
         if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-          // Force a dummy speech to initialize
           const dummy = new SpeechSynthesisUtterance(' ');
           dummy.volume = 0;
           speechSynth.speak(dummy);
@@ -872,10 +868,8 @@
       }
     }
 
-    // Check if mobile and show overlay
     function checkMobileAudio() {
       if (isMobile) {
-        // Show overlay if speech synthesis isn't ready
         if (audioOverlay) {
           audioOverlay.classList.add('show');
           audioOverlay.style.display = 'flex';
@@ -883,11 +877,9 @@
       }
     }
 
-    // Auto-activate on any user interaction (as backup)
     document.addEventListener('touchstart', function() {
       if (!audioEnabled) {
         enableMobileAudio();
-        // Don't auto-close overlay, let user click the button
       }
     }, { passive: true });
 
@@ -970,7 +962,7 @@
                     <div class="image-wrapper" id="imageWrapper">`;
 
       if (imgName) {
-        html += `<img src="${imgName}" alt="${imgName}" 
+        html += `<img src="${imageBasePath + imgName}" alt="${imgName}" 
                       id="mainImage"
                       onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';" />
                  <div class="placeholder" style="display:none;">⚠️ image not found<br><span style="font-size:0.9rem;">${imgName}</span></div>`;
@@ -1084,10 +1076,8 @@
       const btn = document.getElementById('audioBtn');
       if (!btn) return;
       
-      // Try to enable audio on mobile if not enabled
       if (isMobile && !audioEnabled) {
         enableMobileAudio();
-        // Show overlay if still not enabled
         if (audioOverlay) {
           audioOverlay.classList.add('show');
           audioOverlay.style.display = 'flex';
@@ -1112,7 +1102,6 @@
         return;
       }
       
-      // Ensure audio is enabled on mobile
       if (isMobile) {
         enableMobileAudio();
       }
@@ -1149,7 +1138,6 @@
           btn.classList.remove('playing');
         }
         
-        // Retry on mobile if first attempt fails
         if (isMobile && (event.error === 'not-allowed' || event.error === 'synthesis-unavailable')) {
           setTimeout(() => {
             if (!isPlaying) {
@@ -1238,7 +1226,6 @@
       document.removeEventListener('mouseup', endDrag);
     }
 
-    // Expose functions globally
     window.zoomImage = zoomImage;
     window.resetZoom = resetZoom;
     window.toggleAudio = toggleAudio;
@@ -1252,7 +1239,6 @@
       renderPage(p - 1);
     }
 
-    // Event listeners
     prevBtn.addEventListener('click', () => {
       if (currentPage > 0) renderPage(currentPage - 1);
     });
@@ -1272,43 +1258,32 @@
       }
     });
 
-    // Keyboard shortcuts - including Enter key for audio
     document.addEventListener('keydown', (e) => {
-      // Ignore if typing in input fields
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
       
-      // Navigation
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
         if (currentPage > 0) renderPage(currentPage - 1);
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
         if (currentPage < totalPages - 1) renderPage(currentPage + 1);
-      } 
-      // Reset zoom
-      else if (e.key === 'Escape') {
+      } else if (e.key === 'Escape') {
         resetZoom();
         stopSpeech();
-      } 
-      // Zoom controls
-      else if (e.key === '=' || e.key === '+') {
+      } else if (e.key === '=' || e.key === '+') {
         e.preventDefault();
         zoomImage(0.2);
       } else if (e.key === '-') {
         e.preventDefault();
         zoomImage(-0.2);
-      } 
-      // Audio controls: Spacebar OR Enter key
-      else if (e.key === ' ' || e.key === 'Space' || e.key === 'Enter') {
+      } else if (e.key === ' ' || e.key === 'Space' || e.key === 'Enter') {
         e.preventDefault();
         toggleAudio();
       }
     });
 
-    // Load voices and render
     loadVoices().then(() => {
       renderPage(0);
-      // Check for mobile after page loads
       setTimeout(checkMobileAudio, 500);
     });
   })();
