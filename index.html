@@ -303,20 +303,20 @@
     }
 
     .footer-note {
-      text-align: right;
+      text-align: center;
       font-size: 0.65rem;
       color: #5f4a38;
       margin-top: 10px;
-      padding-right: 6px;
+      padding: 8px 6px 0 6px;
       letter-spacing: 0.5px;
       border-top: 1px dashed #cbb59e;
-      padding-top: 8px;
     }
 
     .footer-note span {
       background: #dccbbc;
-      padding: 2px 12px;
+      padding: 3px 14px;
       border-radius: 30px;
+      display: inline-block;
     }
 
     .zoom-hint {
@@ -571,8 +571,10 @@
       }
       .footer-note {
         font-size: 0.55rem;
-        margin-top: 8px;
-        padding-top: 6px;
+        padding: 6px 4px 0 4px;
+      }
+      .footer-note span {
+        padding: 2px 10px;
       }
       .enter-hint {
         font-size: 0.5rem;
@@ -641,6 +643,9 @@
       .enter-hint {
         display: none;
       }
+      .footer-note {
+        font-size: 0.5rem;
+      }
     }
   </style>
 </head>
@@ -675,119 +680,118 @@
     <button class="nav-btn" id="nextBtn" aria-label="next page">NEXT ▶ <span class="key-hint">→</span></button>
   </div>
   <div class="footer-note">
-    <span>✦ tap image to zoom · drag to pan · Space/Enter for audio ✦</span>
+    <span>✦ tap to zoom · drag to pan · Space/Enter for audio · ← → navigate ✦</span>
   </div>
 </div>
 
 <script>
   (function() {
-    // ----- IMAGE FILENAMES (51-100) - NO "images/" folder -----
-    const imageBasePath = "";  // Empty = images are in root folder
+    // ----- IMAGE FILENAMES (51-100) -----
     const imageNames = [
-      "51. DEAD AS A DOORNAIL.png",
-      "52. DEVIL'S ADVOCATE.png",
-      "53. DO THE TRICK.png",
-      "54. DON'T COUNT YOUR CHICKENS BEFORE THEY HATCH.png",
-      "55. DOWN IN THE DUMPS.png",
-      "56. DOWN TO EARTH.png",
-      "57. DRAW THE LINE.png",
-      "58. DRIVE SOMEONE CRAZY.png",
-      "59. DROP THE BALL.png",
-      "60. DUCK OUT.png",
-      "61. EASIER SAID THAN DONE.png",
-      "62. EAT CROW.png",
-      "63. EAT HUMBLE PIE.png",
-      "64. EAT LIKE A HORSE.png",
-      "65. EGG SOMEONE ON.png",
-      "66. EVERY CLOUD HAS A SILVER LINING.png",
-      "67. EYE-OPENER.png",
-      "68. EYE TO EYE.png",
-      "69. FACE THE MUSIC.png",
-      "70. FAIR AND SQUARE.png",
-      "71. FALL APART.png",
-      "72. FALL THROUGH THE CRACKS.png",
-      "73. FEATHER ONE'S NEST.png",
-      "74. FEEL UNDER THE WEATHER.png",
-      "75. FIGHT TOOTH AND NAIL.png",
-      "76. FIND ONE'S FEET.png",
-      "77. FIRST THINGS FIRST.png",
-      "78. FIT AS A FIDDLE.png",
-      "79. FLY OFF THE HANDLE.png",
-      "80. FOOD FOR THOUGHT.png",
-      "81. FOOT THE BILL.png",
-      "82. FOR GOOD.png",
-      "83. FROM SCRATCH.png",
-      "84. FULL OF BEANS.png",
-      "85. GET A GRIP.png",
-      "86. GET COLD FEET.png",
-      "87. GET OFF SOMEONE'S BACK.png",
-      "88. GET OUT OF HAND.png",
-      "89. GET THE BALL ROLLING.png",
-      "90. GET THE HANG OF.png",
-      "91. GET WIND OF.png",
-      "92. GIVE SOMEONE THE BENEFIT OF THE DOUBT.png",
-      "93. GIVE THE GREEN LIGHT.png",
-      "94. GO AGAINST THE GRAIN.png",
-      "95. GO BACK TO THE DRAWING BOARD.png",
-      "96. GO DOWN IN FLAMES.png",
-      "97. GO THE EXTRA MILE.png",
-      "98. GO WITH THE FLOW.png",
-      "99. GOLDEN OPPORTUNITY.png",
-      "100. GOOD THINGS COME TO THOSE WHO WAIT.png"
+      "51. Dead as a doornail.png",
+      "52. Devil's advocate.png",
+      "53. Do the trick.png",
+      "54. Don't count your chickens before they hatch.png",
+      "55. Down in the dumps.png",
+      "56. Down to earth.png",
+      "57. Draw the line.png",
+      "58. Drive someone crazy.png",
+      "59. Drop the ball.png",
+      "60. Duck out.png",
+      "61. Easier said than done.png",
+      "62. Eat crow.png",
+      "63. Eat humble pie.png",
+      "64. Eat like a horse.png",
+      "65. Egg someone on.png",
+      "66. Every cloud has a silver lining.png",
+      "67. Eye-opener.png",
+      "68. Eye to eye.png",
+      "69. Face the music.png",
+      "70. Fair and square.png",
+      "71. Fall apart.png",
+      "72. Fall through the cracks.png",
+      "73. Feather one's nest.png",
+      "74. Feel under the weather.png",
+      "75. Fight tooth and nail.png",
+      "76. Find one's feet.png",
+      "77. First things first.png",
+      "78. Fit as a fiddle.png",
+      "79. Fly off the handle.png",
+      "80. Food for thought.png",
+      "81. Foot the bill.png",
+      "82. For good.png",
+      "83. From scratch.png",
+      "84. Full of beans.png",
+      "85. Get a grip.png",
+      "86. Get cold feet.png",
+      "87. Get off someone's back.png",
+      "88. Get out of hand.png",
+      "89. Get the ball rolling.png",
+      "90. Get the hang of.png",
+      "91. Get wind of.png",
+      "92. Give someone the benefit of the doubt.png",
+      "93. Give the green light.png",
+      "94. Go against the grain.png",
+      "95. Go back to the drawing board.png",
+      "96. Go down in flames.png",
+      "97. Go the extra mile.png",
+      "98. Go with the flow.png",
+      "99. Golden opportunity.png",
+      "100. Good things come to those who wait.png"
     ];
 
-    // ----- TEXT FOR AUDIO (51-100) -----
+    // ----- ENHANCED TEXT FOR AUDIO (51-100) with Meaning, Example, Think of it, When to use -----
     const idiomTexts = [
-      "Dead as a doornail. Completely dead or no longer active or relevant.",
-      "Devil's advocate. Someone who argues against a position to test its strength, not because they disagree.",
-      "Do the trick. To achieve the desired result or effect.",
-      "Don't count your chickens before they hatch. Don't assume success before it happens.",
-      "Down in the dumps. Feeling sad, depressed, or unhappy.",
-      "Down to earth. Practical, realistic, and unpretentious.",
-      "Draw the line. To set a limit or boundary on what you will accept.",
-      "Drive someone crazy. To annoy or irritate someone very much.",
-      "Drop the ball. To make a mistake or fail to meet expectations.",
-      "Duck out. To leave quickly or avoid a situation.",
-      "Easier said than done. Something that is easier to talk about than to actually do.",
-      "Eat crow. To admit you were wrong and accept humiliation.",
-      "Eat humble pie. To admit your mistake and apologize.",
-      "Eat like a horse. To eat a large amount of food.",
-      "Egg someone on. To encourage or urge someone to do something, usually risky.",
-      "Every cloud has a silver lining. There is something good in every bad situation.",
-      "Eye-opener. Something that reveals a surprising or shocking truth.",
-      "Eye to eye. To agree or see things the same way.",
-      "Face the music. To accept the consequences of your actions.",
-      "Fair and square. Honestly and according to the rules.",
-      "Fall apart. To break down emotionally or collapse.",
-      "Fall through the cracks. To be overlooked or forgotten.",
-      "Feather one's nest. To enrich oneself, often at others' expense.",
-      "Feel under the weather. To feel sick or unwell.",
-      "Fight tooth and nail. To fight with great determination.",
-      "Find one's feet. To become comfortable and confident in a new situation.",
-      "First things first. To deal with the most important matters first.",
-      "Fit as a fiddle. In excellent health and condition.",
-      "Fly off the handle. To lose your temper suddenly.",
-      "Food for thought. Something that makes you think carefully.",
-      "Foot the bill. To pay for something.",
-      "For good. Permanently; forever.",
-      "From scratch. From the very beginning, using nothing pre-made.",
-      "Full of beans. Energetic and lively.",
-      "Get a grip. To control your emotions and calm down.",
-      "Get cold feet. To become nervous or afraid before doing something.",
-      "Get off someone's back. To stop bothering or criticizing someone.",
-      "Get out of hand. To become uncontrollable.",
-      "Get the ball rolling. To start something or get a process going.",
-      "Get the hang of. To learn how to do something well.",
-      "Get wind of. To hear about something indirectly.",
-      "Give someone the benefit of the doubt. To believe someone despite doubts.",
-      "Give the green light. To give permission to proceed.",
-      "Go against the grain. To do something opposite to normal practice.",
-      "Go back to the drawing board. To start over with a new plan.",
-      "Go down in flames. To fail spectacularly.",
-      "Go the extra mile. To make more effort than expected.",
-      "Go with the flow. To accept and adapt to circumstances.",
-      "Golden opportunity. A perfect chance to do something.",
-      "Good things come to those who wait. Patience is rewarded."
+      "Dead as a doornail. Meaning: Completely dead or no longer active or relevant. Example: That old tradition is now dead as a doornail. Think of it like this: A doornail is hammered in and cannot be removed. When to use: Use this when something is completely finished or obsolete.",
+      "Devil's advocate. Meaning: Someone who argues against a position to test its strength, not because they disagree. Example: Let me play devil's advocate and challenge your idea. Think of it like this: A person who takes the opposite side for discussion. When to use: Use this when you want to test an idea by arguing against it.",
+      "Do the trick. Meaning: To achieve the desired result or effect. Example: A little extra salt will do the trick for this soup. Think of it like this: When something works exactly as needed. When to use: Use this when something solves a problem effectively.",
+      "Don't count your chickens before they hatch. Meaning: Don't assume success before it happens. Example: You haven't gotten the job yet, so don't count your chickens before they hatch. Think of it like this: Don't celebrate before you actually succeed. When to use: Use this to warn against premature celebration.",
+      "Down in the dumps. Meaning: Feeling sad, depressed, or unhappy. Example: He's been down in the dumps since he lost his job. Think of it like this: Feeling like you're at the bottom of a pit. When to use: Use this when someone is feeling low or depressed.",
+      "Down to earth. Meaning: Practical, realistic, and unpretentious. Example: Despite being famous, she remains down to earth. Think of it like this: Feet firmly on the ground, not in the clouds. When to use: Use this for someone who is humble and practical.",
+      "Draw the line. Meaning: To set a limit or boundary on what you will accept. Example: I draw the line at lying to my friends. Think of it like this: You're drawing a line in the sand that cannot be crossed. When to use: Use this when establishing boundaries.",
+      "Drive someone crazy. Meaning: To annoy or irritate someone very much. Example: That loud music is driving me crazy. Think of it like this: Pushing someone to their limit of patience. When to use: Use this when something is extremely annoying.",
+      "Drop the ball. Meaning: To make a mistake or fail to meet expectations. Example: I really dropped the ball by forgetting the meeting. Think of it like this: Like dropping a football in a game. When to use: Use this when someone makes an error or fails.",
+      "Duck out. Meaning: To leave quickly or avoid a situation. Example: He ducked out of the meeting early. Think of it like this: Quickly slipping away like a duck diving underwater. When to use: Use this when someone leaves abruptly.",
+      "Easier said than done. Meaning: Something that is easier to talk about than to actually do. Example: Losing weight is easier said than done. Think of it like this: Words are cheap, action is hard. When to use: Use this when pointing out that something is harder than it sounds.",
+      "Eat crow. Meaning: To admit you were wrong and accept humiliation. Example: After being proven wrong, he had to eat crow. Think of it like this: Eating something unpleasant and bitter. When to use: Use this when someone must admit their mistake.",
+      "Eat humble pie. Meaning: To admit your mistake and apologize. Example: She had to eat humble pie after making that error. Think of it like this: Swallowing your pride. When to use: Use this when someone must apologize humbly.",
+      "Eat like a horse. Meaning: To eat a large amount of food. Example: After the game, he ate like a horse. Think of it like this: Like a horse that grazes constantly. When to use: Use this when someone has a huge appetite.",
+      "Egg someone on. Meaning: To encourage or urge someone to do something, usually risky. Example: His friends egged him on to jump off the cliff. Think of it like this: Pushing someone like adding fuel to a fire. When to use: Use this when encouraging risky behavior.",
+      "Every cloud has a silver lining. Meaning: There is something good in every bad situation. Example: Losing that job was tough, but every cloud has a silver lining—I found a better one. Think of it like this: Behind every dark cloud, the sun is still shining. When to use: Use this to encourage optimism.",
+      "Eye-opener. Meaning: Something that reveals a surprising or shocking truth. Example: Visiting the village was a real eye-opener. Think of it like this: Like opening your eyes for the first time. When to use: Use this for a surprising revelation.",
+      "Eye to eye. Meaning: To agree or see things the same way. Example: We don't always see eye to eye, but we respect each other. Think of it like this: Looking directly at each other in agreement. When to use: Use this when people agree.",
+      "Face the music. Meaning: To accept the consequences of your actions. Example: It's time to face the music and admit what you did. Think of it like this: Bravely walking toward a difficult situation. When to use: Use this when someone must accept responsibility.",
+      "Fair and square. Meaning: Honestly and according to the rules. Example: They won the game fair and square. Think of it like this: Completely honest and straight. When to use: Use this when something was done fairly.",
+      "Fall apart. Meaning: To break down emotionally or collapse. Example: She fell apart after hearing the bad news. Think of it like this: Like a structure crumbling. When to use: Use this when someone breaks down emotionally.",
+      "Fall through the cracks. Meaning: To be overlooked or forgotten. Example: Some students fall through the cracks in large schools. Think of it like this: Slipping through a gap unnoticed. When to use: Use this when someone is ignored or missed.",
+      "Feather one's nest. Meaning: To enrich oneself, often at others' expense. Example: The politician was accused of feathering his nest. Think of it like this: Building a comfortable nest for yourself. When to use: Use this when someone is selfishly enriching themselves.",
+      "Feel under the weather. Meaning: To feel sick or unwell. Example: I'm feeling a bit under the weather today. Think of it like this: Like being beneath stormy weather. When to use: Use this when you're not feeling well.",
+      "Fight tooth and nail. Meaning: To fight with great determination. Example: She fought tooth and nail to get that promotion. Think of it like this: Using every weapon available, even teeth and nails. When to use: Use this when someone is fiercely determined.",
+      "Find one's feet. Meaning: To become comfortable and confident in a new situation. Example: It took a few weeks, but I'm finally finding my feet. Think of it like this: Learning to stand stable in a new place. When to use: Use this when someone is adjusting.",
+      "First things first. Meaning: To deal with the most important matters first. Example: First things first, let's finish this report. Think of it like this: Putting priority number one at the front. When to use: Use this when prioritizing tasks.",
+      "Fit as a fiddle. Meaning: In excellent health and condition. Example: At 80, my grandfather is still fit as a fiddle. Think of it like this: Like a well-tuned instrument. When to use: Use this for someone in great health.",
+      "Fly off the handle. Meaning: To lose your temper suddenly. Example: He flew off the handle when he saw the bill. Think of it like this: Like a tool flying off its handle. When to use: Use this when someone suddenly gets angry.",
+      "Food for thought. Meaning: Something that makes you think carefully. Example: That article gave me a lot of food for thought. Think of it like this: Mental nourishment for your mind. When to use: Use this for thought-provoking ideas.",
+      "Foot the bill. Meaning: To pay for something. Example: The company foot the bill for the conference. Think of it like this: Covering the cost with your foot. When to use: Use this when someone pays for something.",
+      "For good. Meaning: Permanently; forever. Example: He moved to Canada for good. Think of it like this: Once and for all, never to return. When to use: Use this when something is permanent.",
+      "From scratch. Meaning: From the very beginning, using nothing pre-made. Example: She baked the cake from scratch. Think of it like this: Starting with raw materials. When to use: Use this when starting from the beginning.",
+      "Full of beans. Meaning: Energetic and lively. Example: The kids are full of beans this morning. Think of it like this: Bouncing with energy like beans in a pot. When to use: Use this for someone who is very energetic.",
+      "Get a grip. Meaning: To control your emotions and calm down. Example: Stop panicking and get a grip on yourself. Think of it like this: Firmly holding onto your composure. When to use: Use this when someone needs to calm down.",
+      "Get cold feet. Meaning: To become nervous or afraid before doing something. Example: She got cold feet right before her wedding. Think of it like this: Feeling cold and shaky like cold feet. When to use: Use this when someone gets nervous.",
+      "Get off someone's back. Meaning: To stop bothering or criticizing someone. Example: I wish my boss would get off my back. Think of it like this: Like removing a heavy weight. When to use: Use this when someone is nagging.",
+      "Get out of hand. Meaning: To become uncontrollable. Example: The party got out of hand and they called the police. Think of it like this: Slipping out of your grip like a wild animal. When to use: Use this when things become chaotic.",
+      "Get the ball rolling. Meaning: To start something or get a process going. Example: Let's get the ball rolling on this project. Think of it like this: Starting a ball rolling downhill. When to use: Use this to start an activity.",
+      "Get the hang of. Meaning: To learn how to do something well. Example: I'm finally getting the hang of this new software. Think of it like this: Catching the rhythm or pattern. When to use: Use this when you're learning something new.",
+      "Get wind of. Meaning: To hear about something indirectly. Example: The press got wind of the scandal. Think of it like this: Like catching a scent in the air. When to use: Use this when you hear a rumor or secret.",
+      "Give someone the benefit of the doubt. Meaning: To believe someone despite doubts. Example: I'll give him the benefit of the doubt and trust him. Think of it like this: Giving someone a chance to prove themselves. When to use: Use this when you choose to trust.",
+      "Give the green light. Meaning: To give permission to proceed. Example: The manager gave the green light for the project. Think of it like this: Like a traffic light turning green. When to use: Use this when approving something.",
+      "Go against the grain. Meaning: To do something opposite to normal practice. Example: Going against the grain, he chose a different career path. Think of it like this: Cutting wood against the natural direction. When to use: Use this when someone goes against the norm.",
+      "Go back to the drawing board. Meaning: To start over with a new plan. Example: The design failed, so we went back to the drawing board. Think of it like this: Returning to the drafting table. When to use: Use this when you need to start over.",
+      "Go down in flames. Meaning: To fail spectacularly. Example: His business went down in flames. Think of it like this: Crashing and burning dramatically. When to use: Use this for spectacular failures.",
+      "Go the extra mile. Meaning: To make more effort than expected. Example: Our team always goes the extra mile for customers. Think of it like this: Going far beyond what's required. When to use: Use this for exceptional effort.",
+      "Go with the flow. Meaning: To accept and adapt to circumstances. Example: Just go with the flow and enjoy the trip. Think of it like this: Floating along with the current. When to use: Use this when being flexible.",
+      "Golden opportunity. Meaning: A perfect chance to do something. Example: This job offer is a golden opportunity. Think of it like this: Something as valuable as gold. When to use: Use this for a perfect opportunity.",
+      "Good things come to those who wait. Meaning: Patience is rewarded. Example: After years of waiting, she finally got her dream job. Good things come to those who wait. Think of it like this: Patience is like planting a seed that grows. When to use: Use this to encourage patience."
     ];
 
     const totalPages = imageNames.length;
@@ -869,11 +873,9 @@
     }
 
     function checkMobileAudio() {
-      if (isMobile) {
-        if (audioOverlay) {
-          audioOverlay.classList.add('show');
-          audioOverlay.style.display = 'flex';
-        }
+      if (isMobile && audioOverlay) {
+        audioOverlay.classList.add('show');
+        audioOverlay.style.display = 'flex';
       }
     }
 
@@ -962,7 +964,7 @@
                     <div class="image-wrapper" id="imageWrapper">`;
 
       if (imgName) {
-        html += `<img src="${imageBasePath + imgName}" alt="${imgName}" 
+        html += `<img src="${imgName}" alt="${imgName}" 
                       id="mainImage"
                       onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';" />
                  <div class="placeholder" style="display:none;">⚠️ image not found<br><span style="font-size:0.9rem;">${imgName}</span></div>`;
@@ -1226,6 +1228,7 @@
       document.removeEventListener('mouseup', endDrag);
     }
 
+    // Expose functions globally
     window.zoomImage = zoomImage;
     window.resetZoom = resetZoom;
     window.toggleAudio = toggleAudio;
@@ -1239,6 +1242,7 @@
       renderPage(p - 1);
     }
 
+    // Event listeners
     prevBtn.addEventListener('click', () => {
       if (currentPage > 0) renderPage(currentPage - 1);
     });
@@ -1258,6 +1262,7 @@
       }
     });
 
+    // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
       
@@ -1282,6 +1287,7 @@
       }
     });
 
+    // Load voices and render
     loadVoices().then(() => {
       renderPage(0);
       setTimeout(checkMobileAudio, 500);
